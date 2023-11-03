@@ -34,6 +34,7 @@ public class Main {
         myPlayList.addSongFromAlbum(album2, 2);//Mere
         myPlayList.addSongFromAlbum(album2, 1);//neele
         myPlayList.addSongFromAlbum(album2, 3);//ek chatur
+        myPlayList.addSongFromAlbum(album2, 2);//Mere
         //myPlayList.addSongFromAlbum(album2, 1);//neele
 
 
