@@ -1,5 +1,8 @@
 package listenify;
 
+import listenify.exception.SongAlreadyExistsException;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -39,13 +42,21 @@ public class PlayList {
         //if(album.isSongPresent(songTitle)){
         //album.getSong();
        Optional<Song> optionalSongInAlbum = album.findSong(trackNo); //check song  present in Album
-
-        if(optionalSongInAlbum.isEmpty()){ //if song not present in Album,if song is not available u cant add
-            return "Song not Found in Album"; //to playlist
+        try {
+            if (optionalSongInAlbum.isEmpty()) { //if song not present in Album,if song is not available u cant add
+                return "Song not Found in Album"; //to playlist
+            }
+        }catch (SongAlreadyExistsException ex){
+            System.out.println(ex.getMessage());
         }
            Optional<Song> optionalSongInPlaylist = findSong(optionalSongInAlbum.get().getTitle()); //check song present in playlist
-       if(optionalSongInPlaylist.isPresent()){ //if song  is present already in playlist
-           return "Song Already Present in Playlist";
+       try {
+           if (optionalSongInPlaylist.isPresent()) { //if song  is present already in playlist
+               //return "Song Already Present in Playlist";
+               throw new SongAlreadyExistsException("Song Already Present in Playlist");
+           }
+       }catch (SongAlreadyExistsException ex){
+           System.out.println(ex.getMessage());
        }
 
            songs.add(optionalSongInAlbum.get()); //we have to get song from album and we will add to playlist.
@@ -58,12 +69,23 @@ public class PlayList {
         //album.getSong();
         Optional<Song> optionalSongInAlbum = album.findSong(songTitle); //check song  present in Album
         Optional<Song> optionalSongInPlaylist = findSong(songTitle); //check song present in playlist
-        if(optionalSongInPlaylist.isPresent()){ //if song  is present already in playlist
-            return "Song Already Present in Playlist";
+        try {
+            if (optionalSongInPlaylist.isPresent()) { //if song  is present already in playlist
+
+                return "Song Already Present in Playlist";
+            }
+        }catch (SongAlreadyExistsException ex){
+            System.out.println(ex.getMessage());
         }
-        if(optionalSongInAlbum.isEmpty()){ //if song not present in Album,if song is not available u cant add
-            return "Song not Found in Album"; //to playlist
+        try {
+            if (optionalSongInAlbum.isEmpty()) { //if song not present in Album,if song is not available u cant add
+                //return "Song not Found in Album"; //to playlist
+                throw new SongAlreadyExistsException("Song Already Present in Playlist");
+            }
+        }catch (SongAlreadyExistsException ex){
+            System.out.println(ex.getMessage());
         }
+
         songs.add(optionalSongInAlbum.get()); //we have to get song from album and we will add to playlist.
         itr = songs.listIterator();
         return "song added successfully";

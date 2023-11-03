@@ -16,8 +16,11 @@ public class Main {
         Album album1 = new Album("New Hindi Song", "Arijit Singh");
         album1.addSong(new Song("Tum hi ho", "Arijit Singh", 3));
         album1.addSong(new Song("unholy", "Arijit Singh", 2));
-        album1.addSong(new Song("Perfect GF", "Arijit Singh", 5));
         album1.addSong(new Song("tere bhhi na", "Arijit Singh", 4));
+        album1.addSong(new Song("tere bhhi na", "Arijit Singh", 4));
+        album1.addSong(new Song("Perfect GF", "Arijit Singh", 5));
+       // album1.addSong(new Song("tere bhhi na", "Arijit Singh", 4));
+
 
         Album album2 = new Album("Old Hindi Songs", "Kishore Kumar");
         album2.addSong(new Song("neele neele amber prr", "Kishore Kumar", 5));
@@ -29,8 +32,10 @@ public class Main {
         myPlayList.addSongFromAlbum(album1, 2); //unholy
         myPlayList.addSongFromAlbum(album1, "Perfect GF");
         myPlayList.addSongFromAlbum(album2, 2);//Mere
-        myPlayList.addSongFromAlbum(album2, 3);//ek chatur
         myPlayList.addSongFromAlbum(album2, 1);//neele
+        myPlayList.addSongFromAlbum(album2, 3);//ek chatur
+        //myPlayList.addSongFromAlbum(album2, 1);//neele
+
 
         System.out.println(myPlayList.playCurrentSong());
         System.out.println(myPlayList.playNextSong());
@@ -38,6 +43,9 @@ public class Main {
         System.out.println(myPlayList.playNextSong());
         System.out.println(myPlayList.playPreviousSong());
         System.out.println(myPlayList.playNextSong());
+        System.out.println(myPlayList.playNextSong());
+        System.out.println(myPlayList.playNextSong());
+
 
 //        // Creating a playlist and adding songs from different albums
 //        List<Song> playList = new ArrayList<>();

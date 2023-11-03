@@ -1,5 +1,7 @@
 package listenify;
 import listenify.Song;
+import listenify.exception.SongAlreadyExistsException;
+import listenify.exception.SongNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,7 @@ public class Album {
     public Optional<Song> findSong(String title ){
         for(Song song :songList){
             if(title.equals(song.getTitle()))
-                return Optional.of(song);
+                return Optional.of(song); //true
         }
         return Optional.empty();
     }
@@ -71,15 +73,23 @@ public class Album {
         return Optional.empty();
     }
 
-    public String  addSong(Song song){
-        //check if song already present dont add song
+    public String addSong(Song song) {
+        // Check if song already exists in the album
         Optional<Song> optionalSong = findSong(song.getTitle());
-        if(optionalSong.isPresent()){ //if(!Optional.isEmpty())
-        return "Song already exists in Album";
+        try {
+            if (optionalSong.isPresent()) {
+                throw new SongAlreadyExistsException("Song Already Present in Album");
+            }
+            songList.add(song);
+            return "Song added to Album";
+        } catch (SongAlreadyExistsException e) {
+            System.out.println(e.getMessage());
+        //    return "Failed to add song: " + e.getMessage();
+            return e.getMessage();
         }
-        songList.add(song);
-        return "Song added to Album";
+
     }
+
 
 
 
